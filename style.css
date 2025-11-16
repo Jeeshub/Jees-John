@@ -1,16 +1,36 @@
 .main{
     background-color: white;
 }
-
-
-
 .linkedin{
-    width: 10vh;
-    margin-left: 40%;
+    width: 7vh;
+    margin-left: 20%;
+    animation: linkedin 3s linear ;
+}
+@keyframes linkedin{
+    0%{
+        opacity: 0;
+        transform: translateY(0);
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(90);
+
+    }
 }
 .instagram{
-    width: 15vh;
+    width: 10vh;
     margin-left: 0%;
+    animation: instagram 3s linear;
+}
+@keyframes instagram{
+    0%{
+        opacity: 0;
+        transform: translateY(0);
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(90);
+    }
 }
 .homeimg{
     width: 400px;
@@ -92,4 +112,20 @@
         opacity: 1;
     }
 
+}
+.about{
+    margin-left: 85%;
+    margin-top: -3%;
+    color: rgb(131, 130, 130);
+    background-color:transparent;
+    border: 2px solid;
+    width: 95px;
+    height: 33px;
+    border-radius: 10%;
+    text-shadow: #000000 2px solid ;
+}
+
+.about:active{
+    background-color: rgb(0, 0, 0);
+    color: white;
 }
