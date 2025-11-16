@@ -3,7 +3,7 @@
 }
 .linkedin{
     width: 4%;
-    margin-left: 45%;
+    margin-left: 48%;
     animation: linkedin 3s linear ;
 }
 @keyframes linkedin{
@@ -118,7 +118,7 @@
     margin-top: -3%;
     color: rgb(131, 130, 130);
     background-color:transparent;
-    border: 3px solid;
+    border: 2px solid;
     width: 10%;
     height:auto;
     border-radius: 10%;
