@@ -54,7 +54,7 @@
 }
 .home{
     animation: home 5s linear;
-    padding-left: 10%;
+    padding-left: 2%;
     padding-bottom: 3%;
     color: black;
 }
@@ -140,4 +140,38 @@
    100%{
     transform: translateX(100%);
    }
+}
+@media(max-width: 600px){
+    .linkedin{
+        width: 50px;
+        height: auto;
+        margin-left: 40%;
+    }
+    .instagram{
+        width: 75px;
+        height: auto;
+    }
+    .about{
+        width: 40px;
+        height: auto;
+        margin-bottom: 5%;
+        margin-left: 85%;
+    }
+}
+.about{
+    animation: instagram 5s linear;
+}
+@keyframes about{
+    0%{
+        transform: translateY(0);
+        opacity: 0;
+    }
+    75%{
+        transform: translateY(50);
+        opacity: 0.75;;
+    }
+    100%{
+        transform: translateY(100);
+        opacity: 1;
+    }
 }
