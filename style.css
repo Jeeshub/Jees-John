@@ -3,7 +3,7 @@
 }
 .linkedin{
     width: 4%;
-    margin-left: 48%;
+    margin-left: 50%;
     animation: linkedin 3s linear ;
 }
 @keyframes linkedin{
@@ -114,19 +114,30 @@
 
 }
 .about{
-    margin-left: 85%;
+    margin-left: 90%;
     margin-top: -3%;
     color: rgb(131, 130, 130);
-    background-color:transparent;
+    background-color:#9509e0;
     border: 2px solid;
-    width: 10%;
+    width: 3%;
     height:auto;
-    border-radius: 10%;
-    text-shadow: #000000 2px solid ;
-    text-decoration: none;
+    box-shadow: 0 0 50px 10px #9509e0;
+    border-radius: 10px;
+    
 }
 
 .about:active{
-    background-color: rgb(0, 0, 0);
-    color: white;
+    background-color: #630099;
+}
+.anim{
+    animation: anim 5s linear infinite;
+    overflow: hidden;
+}
+@keyframes anim{
+   0%{
+    transform: translateX(-100%);
+   }
+   100%{
+    transform: translateX(100%);
+   }
 }
