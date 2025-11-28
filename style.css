@@ -207,3 +207,41 @@
     width: 100%;
     height: auto;
 }
+@media (max-width:600px) {
+    .divanim{
+        width: 400px;
+        height: 500px;
+        background:linear-gradient( to top ,rgba(0, 47, 255, 0.61) 10%,rgb(254, 254, 255) 100%);
+        margin: 0 0 0 35px ;
+        border-radius: 10px;
+        border-color: #020202;
+        animation: divanim 5s alternate ;
+
+    }
+    .familyimg{
+        margin: -350px 200px 0 55px;
+        width: 150px;
+        height: auto;
+    }
+    .tit{
+        padding:180px 0px 0px 0px;
+        margin: 0px -200px 0px 0px;
+        text-align: center;
+        color: #020202;
+    }
+    .para{
+        width: 250px; 
+        height: 150px;
+        padding: 10px 0 0 70px;
+    }
+    @keyframes divanim{
+    0%{
+        transform: translatey(100%);
+        opacity: 0;
+    }
+    100%{
+        transform: translatey(0%);
+        opacity: 1;
+    }
+}
+}
