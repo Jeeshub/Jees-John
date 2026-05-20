@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,24 +8,31 @@
 </head>
 <body>
 
-    <header>
+<header>
         <nav class="container">
             <img class="img" src="jeesjohn.jpeg">
             <div class="logo">Jees John</div>
-            <ul class="clr">
+            <ul class="nav-links clr">
                 <li><a href="#about">About</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <a class="btn2" href="light.html">light</a>
+            <button class="theme-toggle" id="themeToggle">🌙</button>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </nav>
     </header>
 
    <body>
     <section id="about" class="hero container background">
         <h1>Hi, I'm <span class="highlight">Jees John</span></h1>
-        <p>Aspiring Software Engineer & Full-Stack Developer</p>
+        <div class="typewriter-container">
+            <p class="typewriter-text"><span id="typewriter">Aspiring Software Engineer</span><span class="cursor">|</span></p>
+        </div>
         <a href="#projects" class="btn">View My Work</a>
     </section>
     </body>
@@ -38,10 +45,30 @@
     <section id="projects" class="container">
         <h2>Technical Skills</h2>
         <div class="skills-grid">
-            <div class="skill-card">Html, Css</div>
-            <div class="skill-card">Git & GitHub</div>
-            <div class="skill-card">Bootstrap</div>
-            <div class="skill-card">Flutter & Dart</div>
+            <div class="skill-card">
+                <h3>Html, Css</h3>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="--progress: 90%"></div>
+                </div>
+            </div>
+            <div class="skill-card">
+                <h3>Git & GitHub</h3>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="--progress: 85%"></div>
+                </div>
+            </div>
+            <div class="skill-card">
+                <h3>Bootstrap</h3>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="--progress: 80%"></div>
+                </div>
+            </div>
+            <div class="skill-card">
+                <h3>Flutter & Dart</h3>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="--progress: 30%"></div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -66,7 +93,25 @@
     <footer id="contact">
         <div class="container">
             <h2>Get In Touch</h2>
-            <p>Email: jeesjohn0@gmail.com</p>
+            <form id="contactForm" class="contact-form">
+                <div class="form-group">
+                    <input type="text" id="name" name="name" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" name="email" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" id="phone" name="phone" placeholder="Your Phone Number" required>
+                </div>
+                <div class="form-group">
+                    <textarea id="message" name="message" placeholder="Your Message" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+            <div id="autoReply" class="auto-reply" style="display: none;">
+                <p><strong>Jees John:</strong> Thanks for your message! I'll review it and respond within 24 hours.</p>
+            </div>
+            <p style="margin-top: 30px;">Email: jeesjohn0@gmail.com</p>
             <p>Location: Kerala, India</p>
             <div class="socials">
                 <a href="https://www.linkedin.com/in/jeesjohnkodiyan/">LinkedIn</a> | <a href="https://github.com/Jeeshub">GitHub</a>
@@ -75,4 +120,83 @@
     </footer>
 
 </body>
+<script>
+const toggle = document.querySelector(".menu-toggle");
+const navLinks = document.querySelector(".nav-links");
+const themeToggle = document.getElementById("themeToggle");
+const html = document.documentElement;
+
+toggle.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
+});
+
+function setTheme(theme) {
+    html.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+    themeToggle.textContent = theme === "dark" ? "🌙" : "☀️";
+}
+
+themeToggle.addEventListener("click", () => {
+    const currentTheme = html.getAttribute("data-theme") || "dark";
+    setTheme(currentTheme === "dark" ? "light" : "dark");
+});
+
+const savedTheme = localStorage.getItem("theme") || "dark";
+setTheme(savedTheme);
+
+document.getElementById("contactForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+    const btn = this.querySelector('button[type="submit"]');
+    const autoReply = document.getElementById("autoReply");
+    
+    btn.textContent = "Sending...";
+    btn.disabled = true;
+    
+    const formData = new FormData(this);
+    const data = Object.fromEntries(formData);
+    
+    await new Promise(r => setTimeout(r, 1000));
+    
+    if (data.name && data.email && data.phone && data.message) {
+        autoReply.style.display = "block";
+        btn.textContent = "Sent ✓";
+        this.reset();
+    } else {
+        btn.textContent = "Send Message";
+        btn.disabled = false;
+        alert("Please fill in all fields.");
+    }
+});
+
+// Typewriter effect
+const texts = ["Aspiring Software Engineer", "Full-Stack Developer", "Mobile App Creator"];
+let textIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+const typewriter = document.getElementById("typewriter");
+
+function type() {
+    const currentText = texts[textIndex];
+    
+    if (isDeleting) {
+        typewriter.textContent = currentText.substring(0, charIndex - 1);
+        charIndex--;
+        if (charIndex === 0) {
+            isDeleting = false;
+            textIndex = (textIndex + 1) % texts.length;
+        }
+    } else {
+        typewriter.textContent = currentText.substring(0, charIndex + 1);
+        charIndex++;
+        if (charIndex === currentText.length) {
+            isDeleting = true;
+        }
+    }
+    
+    const speed = isDeleting ? 50 : 100;
+    setTimeout(type, speed);
+}
+
+type();
+</script>
 </html>
