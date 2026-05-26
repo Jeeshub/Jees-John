@@ -8,36 +8,39 @@
 </head>
 <body>
 
-<header>
-        <nav class="container">
-            <img class="img" src="jeesjohn.jpeg">
-            <div class="logo">Jees John</div>
-            <ul class="nav-links clr">
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <button class="theme-toggle" id="themeToggle">🌙</button>
-            <div class="menu-toggle" id="menuToggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </nav>
-    </header>
+    <section id="hero" class="hero">
+        <header class="hero-header">
+            <nav class="container">
+                <img class="img" src="jeesjohn.jpeg">
+                <div class="logo">Jees John</div>
+                <ul class="nav-links clr">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+                <div class="menu-toggle" id="menuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </header>
 
-   <body>
-    <section id="about" class="hero container background">
-        <h1>Hi, I'm <span class="highlight">Jees John</span></h1>
-        <div class="typewriter-container">
-            <p class="typewriter-text"><span id="typewriter">Aspiring Software Engineer</span><span class="cursor">|</span></p>
+        <div class="hero-bg">
+            <img id="heroFrame" src="herosection/ezgif-frame-001.png" alt="Hero animation frame">
         </div>
-        <a href="#projects" class="btn">View My Work</a>
+        <div class="hero-content container">
+            <div class="hero-copy">
+                <h1>Hi, I'm <span class="highlight">Jees John</span></h1>
+                <p id="heroScrollText" class="hero-subtitle">I build interactive experiences and thoughtful applications.</p>
+                <a href="#projects" class="btn">View My Work</a>
+            </div>
+        </div>
     </section>
-    </body>
-
-    <section id="skills" class="container">
+<div class="secondpage">
+    <section id="about" class="container">
         <h2>About Me</h2>
         <p>I am a developer focused on building functional and beautiful web and mobile applications. I enjoy solving complex problems and turning ideas into code.</p>
     </section>
@@ -89,8 +92,9 @@
             </div>
         </div>
     </section>
+    </div>
 
-    <footer id="contact">
+    <footer id="contact" class="contact-section">
         <div class="container">
             <h2>Get In Touch</h2>
             <form id="contactForm" class="contact-form">
@@ -168,35 +172,73 @@ document.getElementById("contactForm").addEventListener("submit", async function
     }
 });
 
-// Typewriter effect
-const texts = ["Aspiring Software Engineer", "Full-Stack Developer", "Mobile App Creator"];
-let textIndex = 0;
-let charIndex = 0;
-let isDeleting = false;
-const typewriter = document.getElementById("typewriter");
+// Hero scroll animation
+const heroSection = document.getElementById("hero");
+const heroFrame = document.getElementById("heroFrame");
+const heroScrollText = document.getElementById("heroScrollText");
+const contactSection = document.querySelector(".contact-section");
+const heroTitles = [
+    "Aspiring Software Engineer",
+    "Full-Stack Developer",
+    "Mobile App Creator",
+    "Interactive UI Builder"
+];
+const totalFrames = 240;
+let currentFrameIndex = -1;
+let ticking = false;
 
-function type() {
-    const currentText = texts[textIndex];
-    
-    if (isDeleting) {
-        typewriter.textContent = currentText.substring(0, charIndex - 1);
-        charIndex--;
-        if (charIndex === 0) {
-            isDeleting = false;
-            textIndex = (textIndex + 1) % texts.length;
-        }
-    } else {
-        typewriter.textContent = currentText.substring(0, charIndex + 1);
-        charIndex++;
-        if (charIndex === currentText.length) {
-            isDeleting = true;
-        }
-    }
-    
-    const speed = isDeleting ? 50 : 100;
-    setTimeout(type, speed);
+function getFramePath(index) {
+    const padded = String(index + 1).padStart(3, "0");
+    return `herosection/ezgif-frame-${padded}.png`;
 }
 
-type();
+function updateHeroAnimation() {
+    const rect = heroSection.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+    const progress = Math.min(1, Math.max(0, (windowHeight - rect.top) / (windowHeight + rect.height)));
+    const frameIndex = Math.floor(progress * (totalFrames - 1));
+
+    if (frameIndex !== currentFrameIndex) {
+        currentFrameIndex = frameIndex;
+        heroFrame.src = getFramePath(frameIndex);
+    }
+
+    const offset = progress * 40;
+    heroSection.style.setProperty("--hero-offset", `${offset}px`);
+    heroSection.style.setProperty("--hero-opacity", `${1 - progress * 0.4}`);
+
+    const textIndex = Math.min(heroTitles.length - 1, Math.floor(progress * heroTitles.length));
+    heroScrollText.textContent = heroTitles[textIndex];
+    heroFrame.style.transform = `translate(-50%, calc(-50% + ${offset * 0.5}px)) scale(1.12)`;
+    ticking = false;
+}
+
+function updateContactScroll() {
+    if (!contactSection) return;
+    const rect = contactSection.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+    const progress = Math.min(1, Math.max(0, 1 - rect.top / windowHeight));
+    const y = 20 + progress * 45;
+    const alpha = 0.16 + progress * 0.24;
+    document.documentElement.style.setProperty("--contact-spot-y", `${y}%`);
+    document.documentElement.style.setProperty("--contact-spot-alpha", alpha.toFixed(3));
+}
+
+window.addEventListener("scroll", () => {
+    if (!ticking) {
+        window.requestAnimationFrame(() => {
+            updateHeroAnimation();
+            updateContactScroll();
+        });
+        ticking = true;
+    }
+});
+
+window.addEventListener("resize", () => {
+    updateHeroAnimation();
+    updateContactScroll();
+});
+updateHeroAnimation();
+updateContactScroll();
 </script>
 </html>

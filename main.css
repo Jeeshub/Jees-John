@@ -9,6 +9,11 @@
     --text-primary: #ffffff;
     --text-secondary: #a0aec0;
     --text-footer: #e6f1ff;
+    --contact-bg-top: rgba(255, 0, 0, 0.28);
+    --contact-bg-bottom: rgba(0, 0, 0, 0.96);
+    --contact-spot-x: 50%;
+    --contact-spot-y: 20%;
+    --contact-spot-alpha: 0.18;
     --text-form: #2d3748;
     --accent: #00d4ff;
     --accent-gradient: linear-gradient(90deg, #00d4ff, #00ff88);
@@ -25,7 +30,12 @@
     --bg-footer: #0d1424;
     --text-primary: #1a202c;
     --text-secondary: #4a5568;
-    --text-footer: #e6f1ff;
+    --text-footer: #1a202c;
+    --contact-bg-top: rgba(255, 0, 0, 0.38);
+    --contact-bg-bottom: rgba(255, 255, 255, 0.95);
+    --contact-spot-x: 50%;
+    --contact-spot-y: 20%;
+    --contact-spot-alpha: 0.18;
     --text-form: #2d3748;
     --accent: #00d4ff;
     --accent-gradient: linear-gradient(90deg, #00d4ff, #00ff88);
@@ -77,11 +87,17 @@ body {
 
 /* Navigation */
 header {
-    background: var(--bg-secondary);
-    box-shadow: 0 2px 5px var(--shadow-nav);
+    background: transparent;
+    box-shadow: 0 -14px 40px rgba(255, 0, 0, 0.18);
     position: sticky;
     top: 0;
     z-index: 100;
+}
+
+.hero-header {
+    position: absolute;
+    inset: 0 0 auto 0;
+    z-index: 3;
 }
 
 nav {
@@ -185,12 +201,97 @@ nav ul li a {
 
 /* Hero Section */
 .hero {
-    text-align: center;
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.hero-bg img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 120%;
+    height: 120%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+    transition: transform 0.25s ease-out, filter 0.25s ease-out;
+    filter: saturate(1.1) contrast(1.05);
+    will-change: transform, opacity;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(10, 15, 26, 0.25), rgba(10, 15, 26, 0.85));
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    min-height: calc(100vh - 80px);
     padding: 100px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-copy {
+    max-width: 760px;
+    margin: 0 auto;
+    transform: translateY(calc(var(--hero-offset, 0) * -1));
+    opacity: calc(var(--hero-opacity, 1));
+    transition: transform 0.25s ease-out, opacity 0.3s ease-out;
+    text-align: center;
+}
+
+.hero .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.35em;
+    color: #6de6ff;
+    margin-bottom: 16px;
+    font-size: 0.9rem;
 }
 
 .hero h1 {
-    font-size: 3rem;
+    font-size: clamp(2.6rem, 5vw, 5rem);
+    line-height: 1.02;
+}
+
+.hero-subtitle {
+    margin: 24px auto 0;
+    color: var(--text-secondary);
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    max-width: 640px;
+    line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+    .hero {
+        min-height: 80vh;
+    }
+
+    .hero-content {
+        padding: 70px 16px;
+    }
+
+    .hero h1 {
+        font-size: clamp(2.4rem, 8vw, 3rem);
+    }
 }
 
 .highlight {
@@ -324,11 +425,29 @@ h2 {
 }
 
 /* Footer */
-footer {
-    background: var(--bg-footer);
+footer.contact-section {
+    position: relative;
+    background: linear-gradient(180deg, var(--contact-bg-top), var(--contact-bg-bottom));
     color: var(--text-footer);
     text-align: center;
-    padding: 40px 20px;
+    padding: 60px 20px 40px;
+    transition: background 0.4s ease;
+    overflow: hidden;
+}
+
+footer.contact-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at var(--contact-spot-x) var(--contact-spot-y), rgba(255, 0, 0, var(--contact-spot-alpha)), transparent 30%);
+    pointer-events: none;
+    opacity: 0.95;
+    transition: background 0.4s ease, opacity 0.4s ease;
+}
+
+footer.contact-section .container {
+    position: relative;
+    z-index: 2;
 }
 
 footer a {
