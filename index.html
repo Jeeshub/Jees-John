@@ -1,244 +1,593 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JEES JOHN</title>
-    <link rel="stylesheet" href="main.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JEES JOHN</title>
+  <link rel="stylesheet" href="main.css" />
 </head>
 <body>
+  <header class="ui-header">
+    <nav class="ui-nav container">
+      <div class="ui-brand">
+        <img class="img" src="jeesjohn.jpeg" alt="Jees John" />
+        <div class="logo">Jees John</div>
+      </div>
 
-    <section id="hero" class="hero">
-        <header class="hero-header">
-            <nav class="container">
-                <img class="img" src="jeesjohn.jpeg">
-                <div class="logo">Jees John</div>
-                <ul class="nav-links clr">
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#skills">Skills</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-                <button class="theme-toggle" id="themeToggle">🌙</button>
-                <div class="menu-toggle" id="menuToggle">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </nav>
-        </header>
+      <ul class="nav-links clr" id="uiNavLinks">
+        <li><a href="#about" data-nav="about">About</a></li>
+        <li><a href="#skills" data-nav="skills">Skills</a></li>
+        <li><a href="#projects" data-nav="projects">Projects</a></li>
+        <li><a href="#contact" data-nav="contact">Contact</a></li>
+      </ul>
 
-        <div class="hero-bg">
-            <img id="heroFrame" src="herosection/ezgif-frame-001.png" alt="Hero animation frame">
+      <div class="ui-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
+        <div class="menu-toggle" id="menuToggle" aria-label="Open menu" role="button" tabindex="0">
+          <span></span>
+          <span></span>
+          <span></span>
         </div>
-        <div class="hero-content container">
-            <div class="hero-copy">
-                <h1>Hi, I'm <span class="highlight">Jees John</span></h1>
-                <p id="heroScrollText" class="hero-subtitle">I build interactive experiences and thoughtful applications.</p>
-                <a href="#projects" class="btn">View My Work</a>
-            </div>
-        </div>
-    </section>
-<div class="secondpage">
-    <section id="about" class="container">
-        <h2>About Me</h2>
-        <p>I am a developer focused on building functional and beautiful web and mobile applications. I enjoy solving complex problems and turning ideas into code.</p>
-    </section>
+        <button class="reset-btn" id="resetBtn" type="button" style="display:none;">Reset Camera / Back</button>
+      </div>
+    </nav>
+  </header>
 
-    <section id="projects" class="container">
-        <h2>Technical Skills</h2>
-        <div class="skills-grid">
-            <div class="skill-card">
-                <h3>Html, Css</h3>
-                <div class="skill-bar">
-                    <div class="skill-progress" style="--progress: 90%"></div>
-                </div>
-            </div>
-            <div class="skill-card">
-                <h3>Git & GitHub</h3>
-                <div class="skill-bar">
-                    <div class="skill-progress" style="--progress: 85%"></div>
-                </div>
-            </div>
-            <div class="skill-card">
-                <h3>Bootstrap</h3>
-                <div class="skill-bar">
-                    <div class="skill-progress" style="--progress: 80%"></div>
-                </div>
-            </div>
-            <div class="skill-card">
-                <h3>Flutter & Dart</h3>
-                <div class="skill-bar">
-                    <div class="skill-progress" style="--progress: 30%"></div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <main class="stage" id="stage">
+    <div id="canvasHost" class="canvas-host" aria-label="3D portfolio scene"></div>
 
-    <section id="" class="container">
-        <h2>Featured Projects</h2>
-        <div class="projects-grid">
-            <div class="project-item">
-                <h3>flutter simple project</h3>
-                <p> A min application for counting increase and decrease.<br>
-                </p>
-                     <a href="https://t.me/JKModscom/25">tap pro</a>
-            </div>
-            <div class="project-item">
-                <h3>Personal Portfolio</h3>
-                <p>It described about my personal details.</p>
-                <a href="https://jeeshub.github.io/Jees-John/">personal Portfolio</a>
-
-            </div>
+    <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-hidden="true">
+      <div class="modal" id="modal">
+        <div class="modal-top">
+          <div class="modal-kicker" id="modalKicker">Modal</div>
+          <button class="modal-close" id="modalClose" type="button" aria-label="Close modal">✕</button>
         </div>
-    </section>
+
+        <h2 class="modal-title" id="modalTitle">Title</h2>
+
+        <div class="modal-body" id="modalBody"></div>
+        <div class="modal-actions" id="modalActions"></div>
+      </div>
     </div>
+  </main>
 
-    <footer id="contact" class="contact-section">
-        <div class="container">
-            <h2>Get In Touch</h2>
-            <form id="contactForm" class="contact-form">
-                <div class="form-group">
-                    <input type="text" id="name" name="name" placeholder="Your Name" required>
-                </div>
-                <div class="form-group">
-                    <input type="email" id="email" name="email" placeholder="Your Email" required>
-                </div>
-                <div class="form-group">
-                    <input type="tel" id="phone" name="phone" placeholder="Your Phone Number" required>
-                </div>
-                <div class="form-group">
-                    <textarea id="message" name="message" placeholder="Your Message" rows="4" required></textarea>
-                </div>
-                <button type="submit" class="btn">Send Message</button>
-            </form>
-            <div id="autoReply" class="auto-reply" style="display: none;">
-                <p><strong>Jees John:</strong> Thanks for your message! I'll review it and respond within 24 hours.</p>
-            </div>
-            <p style="margin-top: 30px;">Email: jeesjohn0@gmail.com</p>
-            <p>Location: Kerala, India</p>
-            <div class="socials">
-                <a href="https://www.linkedin.com/in/jeesjohnkodiyan/">LinkedIn</a> | <a href="https://github.com/Jeeshub">GitHub</a>
-            </div>
-        </div>
-    </footer>
+  <script type="module">
+    import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
+    import { OrbitControls } from 'https://unpkg.com/three@0.160.0/examples/jsm/controls/OrbitControls.js';
 
+    // ---------- UI + Theme ----------
+    const toggle = document.querySelector('.menu-toggle');
+    const navLinks = document.getElementById('uiNavLinks');
+    const themeToggle = document.getElementById('themeToggle');
+    const html = document.documentElement;
+
+    toggle.addEventListener('click', () => navLinks.classList.toggle('active'));
+
+    function setTheme(theme) {
+      html.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      themeToggle.textContent = theme === 'dark' ? '🌙' : '☀️';
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = html.getAttribute('data-theme') || 'dark';
+      setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+    });
+
+    setTheme(localStorage.getItem('theme') || 'dark');
+
+    // ---------- Scene ----------
+    const host = document.getElementById('canvasHost');
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
+    renderer.setSize(host.clientWidth, host.clientHeight);
+    host.appendChild(renderer.domElement);
+
+    const scene = new THREE.Scene();
+    scene.fog = new THREE.Fog(0x0a0f1a, 14, 40);
+
+    const camera = new THREE.PerspectiveCamera(45, host.clientWidth / host.clientHeight, 0.1, 200);
+    camera.position.set(8.5, 7.5, 8.5);
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.08;
+    controls.enablePan = false;
+    controls.minDistance = 4.2;
+    controls.maxDistance = 18;
+    controls.target.set(-0.8, 1.2, -6.0);
+
+    // Lights (cozy)
+    scene.add(new THREE.HemisphereLight(0x9fe8ff, 0x1a1f2b, 0.85));
+    scene.add(new THREE.AmbientLight(0xffffff, 0.35));
+    const warmKey = new THREE.DirectionalLight(0xffe7b8, 0.6);
+    warmKey.position.set(6, 10, 2);
+    scene.add(warmKey);
+
+    // Materials
+    const matFloor = new THREE.MeshStandardMaterial({ color: 0x121826, roughness: 0.95, metalness: 0.02 });
+    const matWallA = new THREE.MeshStandardMaterial({ color: 0x0f1522, roughness: 0.95, metalness: 0.02 });
+    const matWallB = new THREE.MeshStandardMaterial({ color: 0x0d121c, roughness: 0.95, metalness: 0.02 });
+    const matDeskWood = new THREE.MeshStandardMaterial({ color: 0x8b5a2b, roughness: 0.78, metalness: 0.08 });
+    const matClay = new THREE.MeshStandardMaterial({ color: 0xe6e1d6, roughness: 0.9, metalness: 0.01 });
+    const matClayDark = new THREE.MeshStandardMaterial({ color: 0x2b3445, roughness: 0.95, metalness: 0.01 });
+
+    const neonColor = new THREE.Color(0x63ffb0);
+
+    function makeGlowingMaterial(baseColor) {
+      return new THREE.MeshStandardMaterial({
+        color: baseColor,
+        roughness: 0.45,
+        metalness: 0.05,
+        emissive: neonColor.clone().multiplyScalar(0.25),
+        emissiveIntensity: 1.0,
+      });
+    }
+
+    function makeInteractiveMesh(geom, baseMat) {
+      const mesh = new THREE.Mesh(geom, baseMat);
+      mesh.userData.isInteractive = true;
+      mesh.userData.baseEmissive = baseMat.emissive ? baseMat.emissive.clone() : new THREE.Color(0x000000);
+      mesh.userData.hoverEmissive = neonColor.clone().multiplyScalar(0.85);
+      return mesh;
+    }
+
+    // ---------- Build room ----------
+    const room = new THREE.Group();
+    scene.add(room);
+
+    const floor = new THREE.Mesh(new THREE.BoxGeometry(18, 0.25, 18), matFloor);
+    floor.position.set(0, -0.15, 0);
+    room.add(floor);
+
+    const wallA = new THREE.Mesh(new THREE.BoxGeometry(18, 6, 0.25), matWallA);
+    wallA.position.set(0, 2.6, -9);
+    room.add(wallA);
+
+    const wallB = new THREE.Mesh(new THREE.BoxGeometry(0.25, 6, 18), matWallB);
+    wallB.position.set(-9, 2.6, 0);
+    room.add(wallB);
+
+    // Desk
+    const deskTop = new THREE.Mesh(new THREE.BoxGeometry(5.2, 0.2, 1.4), matDeskWood);
+    deskTop.position.set(-1.2, 1.05, -7.0);
+    room.add(deskTop);
+
+    const deskLeg = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.95, 0.18), matClayDark);
+    deskLeg.position.set(-1.2 - 2.1, 0.55, -7.0 - 0.6);
+    room.add(deskLeg);
+    const deskLeg2 = deskLeg.clone();
+    deskLeg2.position.set(-1.2 - 2.1, 0.55, -7.0 + 0.6);
+    const deskLeg3 = deskLeg.clone();
+    deskLeg3.position.set(-1.2 + 2.1, 0.55, -7.0 - 0.6);
+    const deskLeg4 = deskLeg.clone();
+    deskLeg4.position.set(-1.2 + 2.1, 0.55, -7.0 + 0.6);
+    room.add(deskLeg2, deskLeg3, deskLeg4);
+
+    // Monitor (A)
+    const monitorGroup = new THREE.Group();
+    monitorGroup.position.set(-0.2, 1.55, -6.7);
+
+    const monitorBase = makeInteractiveMesh(new THREE.BoxGeometry(0.75, 0.18, 0.55), makeGlowingMaterial(0x1b2332));
+    monitorBase.userData.targetCamera = { pos: new THREE.Vector3(-0.7, 3.2, -4.0), tgt: new THREE.Vector3(-0.2, 1.55, -6.7) };
+    monitorBase.userData.objectKey = 'projects';
+    monitorBase.userData.hoverLift = 0.18;
+    monitorGroup.add(monitorBase);
+
+    monitorGroup.add(new THREE.Mesh(new THREE.BoxGeometry(0.15, 0.55, 0.15), new THREE.MeshStandardMaterial({ color: 0x262f41, roughness: 0.8, metalness: 0.05 }))); 
+
+    const screen = makeInteractiveMesh(
+      new THREE.BoxGeometry(0.78, 0.48, 0.06),
+      new THREE.MeshStandardMaterial({ color: 0x0f1522, roughness: 0.25, metalness: 0.02, emissive: 0x2a4bff, emissiveIntensity: 0.08 })
+    );
+    screen.userData.targetCamera = monitorBase.userData.targetCamera;
+    screen.userData.objectKey = 'projects';
+    screen.userData.hoverLift = 0.18;
+    monitorGroup.add(screen);
+
+    const monitorNeon = new THREE.Mesh(
+      new THREE.BoxGeometry(0.85, 0.02, 0.06),
+      new THREE.MeshStandardMaterial({ color: 0x0b1020, emissive: 0x63ffb0, emissiveIntensity: 0.55, roughness: 0.3, metalness: 0.05 })
+    );
+    monitorNeon.position.set(0, 0.255, 0.03);
+    monitorGroup.add(monitorNeon);
+
+    room.add(monitorGroup);
+
+    // Smartphone (B)
+    const phoneGroup = new THREE.Group();
+    phoneGroup.position.set(-0.1, 1.0, -5.55);
+    phoneGroup.rotation.y = Math.PI * 0.14;
+
+    const phoneBody = makeInteractiveMesh(new THREE.BoxGeometry(0.22, 0.48, 0.04), makeGlowingMaterial(0x2a3245));
+    phoneBody.userData.targetCamera = { pos: new THREE.Vector3(2.9, 3.1, -5.4), tgt: new THREE.Vector3(-0.1, 1.2, -5.55) };
+    phoneBody.userData.objectKey = 'mobile';
+    phoneBody.userData.hoverLift = 0.12;
+    phoneGroup.add(phoneBody);
+
+    const phoneScreen = makeInteractiveMesh(
+      new THREE.BoxGeometry(0.205, 0.44, 0.02),
+      new THREE.MeshStandardMaterial({ color: 0x071019, roughness: 0.25, emissive: 0x63ffb0, emissiveIntensity: 0.08 })
+    );
+    phoneScreen.userData.targetCamera = phoneBody.userData.targetCamera;
+    phoneScreen.userData.objectKey = 'mobile';
+    phoneScreen.userData.hoverLift = 0.12;
+    phoneScreen.position.set(0, 0, 0.021);
+    phoneGroup.add(phoneScreen);
+
+    room.add(phoneGroup);
+
+    // Shelf/Books (C)
+    const shelfGroup = new THREE.Group();
+    shelfGroup.position.set(-3.2, 2.7, -7.6);
+    const shelfBoard = new THREE.Mesh(new THREE.BoxGeometry(2.1, 0.08, 0.55), matClayDark);
+    shelfGroup.add(shelfBoard);
+
+    function addBook(x, y, w, h, color) {
+      const b = makeInteractiveMesh(
+        new THREE.BoxGeometry(w, h, 0.12),
+        new THREE.MeshStandardMaterial({ color, roughness: 0.85, metalness: 0.03, emissive: 0x63ffb0, emissiveIntensity: 0.05 })
+      );
+      b.position.set(x, y, 0.24);
+      b.userData.targetCamera = { pos: new THREE.Vector3(-4.2, 4.0, -7.0), tgt: new THREE.Vector3(-3.2, 2.6, -7.6) };
+      b.userData.objectKey = 'core';
+      b.userData.hoverLift = 0.1;
+      shelfGroup.add(b);
+    }
+
+    addBook(-0.7, 0.0, 0.18, 0.35, 0x4a82ff);
+    addBook(-0.35, 0.05, 0.16, 0.28, 0x8f5cff);
+    addBook(0.0, -0.02, 0.2, 0.32, 0x63ffb0);
+    addBook(0.35, 0.07, 0.14, 0.26, 0xff6bd6);
+    addBook(0.62, -0.01, 0.16, 0.3, 0xffc95c);
+
+    room.add(shelfGroup);
+
+    // Chair (non-interactive)
+    const chairGroup = new THREE.Group();
+    chairGroup.position.set(-1.2, 0.9, -5.9);
+    chairGroup.add(new THREE.Mesh(new THREE.BoxGeometry(1.0, 0.15, 1.0), matClayDark));
+    const chairSeat = new THREE.Mesh(new THREE.BoxGeometry(1.0, 0.12, 1.0), matClay);
+    chairSeat.position.set(0, 0.35, 0);
+    chairGroup.add(chairSeat);
+    const chairBack = new THREE.Mesh(new THREE.BoxGeometry(1.05, 0.65, 0.12), matClay);
+    chairBack.position.set(0, 0.8, -0.55);
+    chairGroup.add(chairBack);
+    room.add(chairGroup);
+
+    // Laptop (D)
+    const laptopGroup = new THREE.Group();
+    laptopGroup.position.set(1.25, 1.1, -6.15);
+    laptopGroup.rotation.y = -0.45;
+
+    const laptopBase = makeInteractiveMesh(new THREE.BoxGeometry(0.9, 0.12, 0.6), makeGlowingMaterial(0x242c3f));
+    laptopBase.userData.targetCamera = { pos: new THREE.Vector3(2.9, 3.4, -6.6), tgt: new THREE.Vector3(1.25, 1.2, -6.15) };
+    laptopBase.userData.objectKey = 'contact';
+    laptopBase.userData.hoverLift = 0.12;
+    laptopGroup.add(laptopBase);
+
+    const lid = makeInteractiveMesh(
+      new THREE.BoxGeometry(0.88, 0.55, 0.08),
+      new THREE.MeshStandardMaterial({ color: 0x0f1522, roughness: 0.2, emissive: 0x63ffb0, emissiveIntensity: 0.08, metalness: 0.02 })
+    );
+    lid.userData.targetCamera = laptopBase.userData.targetCamera;
+    lid.userData.objectKey = 'contact';
+    lid.userData.hoverLift = 0.12;
+    lid.position.set(0.0, 0.43, -0.02);
+    lid.rotation.x = -0.85;
+    laptopGroup.add(lid);
+
+    const laptopNeon = new THREE.Mesh(
+      new THREE.BoxGeometry(0.55, 0.02, 0.6),
+      new THREE.MeshStandardMaterial({ color: 0x0b1020, emissive: 0x63ffb0, emissiveIntensity: 0.35, roughness: 0.35 })
+    );
+    laptopNeon.position.set(0.02, 0.0, -0.02);
+    laptopNeon.scale.set(1, 1, 0.95);
+    laptopGroup.add(laptopNeon);
+
+    room.add(laptopGroup);
+
+    // Picture frame (E)
+    const frameGroup = new THREE.Group();
+    frameGroup.position.set(-3.9, 2.0, -8.88);
+
+    const frame = makeInteractiveMesh(
+      new THREE.BoxGeometry(1.2, 0.8, 0.06),
+      new THREE.MeshStandardMaterial({ color: 0x151c2c, roughness: 0.85, metalness: 0.03, emissive: 0x63ffb0, emissiveIntensity: 0.06 })
+    );
+    frame.userData.targetCamera = { pos: new THREE.Vector3(-4.3, 3.4, -5.0), tgt: new THREE.Vector3(-3.9, 2.0, -8.88) };
+    frame.userData.objectKey = 'about';
+    frame.userData.hoverLift = 0.1;
+    frameGroup.add(frame);
+
+    const glass = makeInteractiveMesh(
+      new THREE.BoxGeometry(1.05, 0.67, 0.02),
+      new THREE.MeshStandardMaterial({ color: 0x071019, roughness: 0.25, metalness: 0.02, emissive: 0x63ffb0, emissiveIntensity: 0.04 })
+    );
+    glass.userData.targetCamera = frame.userData.targetCamera;
+    glass.userData.objectKey = 'about';
+    glass.userData.hoverLift = 0.1;
+    glass.position.set(0, 0, 0.04);
+    frameGroup.add(glass);
+
+    room.add(frameGroup);
+
+    // Lamp
+    const lamp = new THREE.Group();
+    lamp.position.set(-1.0, 1.25, -7.15);
+    const lampStand = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.35, 0.05), matClayDark);
+    lampStand.position.set(0, 0.25, 0);
+    lamp.add(lampStand);
+
+    const lampArm = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.06, 0.2), matClayDark);
+    lampArm.position.set(0.02, 0.52, -0.06);
+    lampArm.rotation.y = 0.2;
+    lamp.add(lampArm);
+
+    const lampHead = new THREE.Mesh(
+      new THREE.BoxGeometry(0.14, 0.1, 0.14),
+      new THREE.MeshStandardMaterial({ color: 0x2a3245, roughness: 0.6, metalness: 0.1, emissive: 0xffc65c, emissiveIntensity: 1.2 })
+    );
+    lampHead.position.set(0.12, 0.56, -0.18);
+    lamp.add(lampHead);
+
+    const lampLight = new THREE.PointLight(0xffc65c, 0.9, 14, 2.0);
+    lampLight.position.copy(lampHead.position.clone().add(lamp.position));
+    scene.add(lamp);
+    scene.add(lampLight);
+
+    // ---------- Interaction ----------
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+    let hovered = null;
+    let isModalOpen = false;
+    let cameraTween = null;
+
+    const modalOverlay = document.getElementById('modalOverlay');
+    const resetBtn = document.getElementById('resetBtn');
+
+    function setHover(mesh, on) {
+      if (!mesh || !mesh.userData) return;
+      if (on) {
+        if (!mesh.userData.__origPos) mesh.userData.__origPos = mesh.position.clone();
+        if (mesh.material.emissive && mesh.userData.hoverEmissive) {
+          mesh.material.emissive.copy(mesh.userData.hoverEmissive);
+          mesh.material.emissiveIntensity = 1.1;
+        }
+        mesh.position.y += (mesh.userData.hoverLift || 0.12);
+      } else {
+        if (mesh.userData.__origPos) mesh.position.copy(mesh.userData.__origPos);
+        if (mesh.material.emissive && mesh.userData.baseEmissive) {
+          mesh.material.emissive.copy(mesh.userData.baseEmissive);
+          mesh.material.emissiveIntensity = 0.08;
+        }
+      }
+    }
+
+    function getModalContent(key) {
+      switch (key) {
+        case 'projects':
+          return {
+            kicker: 'Featured Projects',
+            title: 'Projects',
+            bodyHtml: `
+              <p>Featured Projects. 1) <strong>Flutter Simple Project</strong>: A mini application for counting increase and decrease.</p>
+              <p>2) <strong>Personal Portfolio</strong>: My interactive web space.</p>
+            `,
+            actionsHtml: `
+              <a class="action-btn" href="https://t.me/JKModscom/25" target="_blank" rel="noreferrer">Open Flutter Project</a>
+              <a class="action-btn secondary" href="https://jeeshub.github.io/Jees-John/" target="_blank" rel="noreferrer">Open Personal Portfolio</a>
+            `
+          };
+        case 'mobile':
+          return {
+            kicker: 'Mobile Skills',
+            title: 'Mobile Development',
+            bodyHtml: `
+              <p><strong>Mobile Development:</strong> Specialized in Flutter & Dart. Building cross-platform experiences from scratch.</p>
+            `,
+            actionsHtml: `
+              <a class="action-btn secondary" href="https://github.com/Jeeshub" target="_blank" rel="noreferrer">GitHub</a>
+            `
+          };
+        case 'core':
+          return {
+            kicker: 'Core Skills',
+            title: 'Web Frontend & Tools',
+            bodyHtml: `
+              <p><strong>Web Frontend & Tools:</strong> HTML5, CSS3, Bootstrap, Git & GitHub. Crafting structural, responsive layouts.</p>
+            `,
+            actionsHtml: `
+              <a class="action-btn" href="https://github.com/Jeeshub" target="_blank" rel="noreferrer">See Code</a>
+            `
+          };
+        case 'contact':
+          return {
+            kicker: 'Get In Touch',
+            title: 'Contact',
+            bodyHtml: `
+              <p><strong>Get In Touch.</strong></p>
+              <p>Email: <a href="mailto:jeesjohn0@gmail.com">jeesjohn0@gmail.com</a></p>
+              <p>Location: Kerala, India</p>
+            `,
+            actionsHtml: `
+              <a class="action-btn" href="https://github.com/Jeeshub" target="_blank" rel="noreferrer">GitHub (Jeeshub)</a>
+              <a class="action-btn secondary" href="https://www.linkedin.com/in/jeesjohnkodiyan/" target="_blank" rel="noreferrer">LinkedIn</a>
+            `
+          };
+        case 'about':
+          return {
+            kicker: 'About Me',
+            title: 'About',
+            bodyHtml: `
+              <p>Hi, I'm <strong>Jees John</strong>. I build interactive experiences and thoughtful applications.</p>
+              <p>I enjoy solving complex problems and turning ideas into code.</p>
+            `,
+            actionsHtml: `
+              <span class="pill">Cozy • Minimal • Interactive</span>
+            `
+          };
+        default:
+          return { kicker: '', title: '', bodyHtml: '', actionsHtml: '' };
+      }
+    }
+
+    function openModal(key) {
+      const modalKicker = document.getElementById('modalKicker');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalBody = document.getElementById('modalBody');
+      const modalActions = document.getElementById('modalActions');
+
+      const content = getModalContent(key);
+      modalKicker.textContent = content.kicker;
+      modalTitle.textContent = content.title;
+      modalBody.innerHTML = content.bodyHtml;
+      modalActions.innerHTML = content.actionsHtml || '';
+
+      isModalOpen = true;
+      modalOverlay.classList.add('open');
+      modalOverlay.setAttribute('aria-hidden', 'false');
+      resetBtn.style.display = 'block';
+      controls.enabled = false;
+    }
+
+    function closeModal() {
+      isModalOpen = false;
+      modalOverlay.classList.remove('open');
+      modalOverlay.setAttribute('aria-hidden', 'true');
+      resetBtn.style.display = 'none';
+      controls.enabled = true;
+      focusFullRoom();
+    }
+
+    document.getElementById('modalClose').addEventListener('click', closeModal);
+    modalOverlay.addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) closeModal();
+    });
+    resetBtn.addEventListener('click', closeModal);
+
+    function tweenCameraTo(pos, tgt, durationMs = 900) {
+      const startPos = camera.position.clone();
+      const startTgt = controls.target.clone();
+      const endPos = pos.clone();
+      const endTgt = tgt.clone();
+      const start = performance.now();
+
+      if (cameraTween) cancelAnimationFrame(cameraTween);
+
+      controls.enabled = false;
+      function step(now) {
+        const t = Math.min(1, (now - start) / durationMs);
+        const tt = t * t * (3 - 2 * t);
+        camera.position.lerpVectors(startPos, endPos, tt);
+        controls.target.lerpVectors(startTgt, endTgt, tt);
+        controls.update();
+        if (t < 1) cameraTween = requestAnimationFrame(step);
+        else cameraTween = null;
+      }
+      cameraTween = requestAnimationFrame(step);
+    }
+
+    const fullRoomFocus = { pos: new THREE.Vector3(8.5, 7.5, 8.5), tgt: new THREE.Vector3(-0.8, 1.2, -6.0) };
+
+    function focusFullRoom() {
+      tweenCameraTo(fullRoomFocus.pos, fullRoomFocus.tgt, 950);
+    }
+
+    function findAnyInteractiveWithKey(key) {
+      let found = null;
+      scene.traverse((obj) => {
+        if (found) return;
+        if (obj?.userData?.isInteractive && obj.userData.objectKey === key) found = obj.userData;
+      });
+      return found;
+    }
+
+    function focusObject(modalKey) {
+      const info = findAnyInteractiveWithKey(modalKey);
+      if (!info?.targetCamera) return;
+      tweenCameraTo(info.targetCamera.pos, info.targetCamera.tgt, 900);
+      openModal(modalKey);
+    }
+
+    function updateMouseFromEvent(e) {
+      const rect = renderer.domElement.getBoundingClientRect();
+      mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      mouse.y = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
+    }
+
+    function intersectInteractive() {
+      raycaster.setFromCamera(mouse, camera);
+      const objects = [];
+      scene.traverse((obj) => { if (obj?.userData?.isInteractive) objects.push(obj); });
+      const hits = raycaster.intersectObjects(objects, true);
+      return hits?.length ? hits[0].object : null;
+    }
+
+    function onMove(e) {
+      if (isModalOpen) return;
+      updateMouseFromEvent(e);
+      const hit = intersectInteractive();
+      if (hit !== hovered) {
+        setHover(hovered, false);
+        hovered = hit;
+        setHover(hovered, true);
+      }
+    }
+
+    function onClick(e) {
+      if (isModalOpen) return;
+      if (!e) return;
+      updateMouseFromEvent(e);
+      const hit = intersectInteractive();
+      if (!hit?.userData?.objectKey) return;
+      focusObject(hit.userData.objectKey);
+    }
+
+    renderer.domElement.addEventListener('mousemove', onMove);
+    renderer.domElement.addEventListener('click', onClick);
+    renderer.domElement.addEventListener('touchstart', (e) => {
+      if (e.touches?.[0]) onClick({ clientX: e.touches[0].clientX, clientY: e.touches[0].clientY });
+    }, { passive: true });
+
+    // Nav mapping to same camera focus
+    document.querySelectorAll('[data-nav]').forEach((a) => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        const key = a.getAttribute('data-nav');
+        const map = { about: 'about', skills: 'core', projects: 'projects', contact: 'contact' };
+        const modalKey = map[key];
+        if (!modalKey) return;
+        focusObject(modalKey);
+      });
+    });
+
+    // ---------- Animate ----------
+    const clock = new THREE.Clock();
+    function animate() {
+      const t = clock.getElapsedTime();
+      lamp.rotation.y = Math.sin(t * 0.5) * 0.03;
+      lampLight.position.copy(lampHead.position.clone().add(lamp.position));
+      monitorNeon.material.emissiveIntensity = 0.45 + Math.sin(t * 1.2) * 0.12;
+      laptopNeon.material.emissiveIntensity = 0.3 + Math.sin(t * 1.0 + 1.4) * 0.08;
+      shelfGroup.rotation.y = Math.sin(t * 0.25) * 0.02;
+      renderer.render(scene, camera);
+      requestAnimationFrame(animate);
+    }
+
+    function resize() {
+      const w = host.clientWidth;
+      const h = host.clientHeight;
+      renderer.setSize(w, h);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    }
+    window.addEventListener('resize', resize);
+
+    focusFullRoom();
+    animate();
+  </script>
 </body>
-<script>
-const toggle = document.querySelector(".menu-toggle");
-const navLinks = document.querySelector(".nav-links");
-const themeToggle = document.getElementById("themeToggle");
-const html = document.documentElement;
-
-toggle.addEventListener("click", () => {
-    navLinks.classList.toggle("active");
-});
-
-function setTheme(theme) {
-    html.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
-    themeToggle.textContent = theme === "dark" ? "🌙" : "☀️";
-}
-
-themeToggle.addEventListener("click", () => {
-    const currentTheme = html.getAttribute("data-theme") || "dark";
-    setTheme(currentTheme === "dark" ? "light" : "dark");
-});
-
-const savedTheme = localStorage.getItem("theme") || "dark";
-setTheme(savedTheme);
-
-document.getElementById("contactForm").addEventListener("submit", async function(e) {
-    e.preventDefault();
-    const btn = this.querySelector('button[type="submit"]');
-    const autoReply = document.getElementById("autoReply");
-    
-    btn.textContent = "Sending...";
-    btn.disabled = true;
-    
-    const formData = new FormData(this);
-    const data = Object.fromEntries(formData);
-    
-    await new Promise(r => setTimeout(r, 1000));
-    
-    if (data.name && data.email && data.phone && data.message) {
-        autoReply.style.display = "block";
-        btn.textContent = "Sent ✓";
-        this.reset();
-    } else {
-        btn.textContent = "Send Message";
-        btn.disabled = false;
-        alert("Please fill in all fields.");
-    }
-});
-
-// Hero scroll animation
-const heroSection = document.getElementById("hero");
-const heroFrame = document.getElementById("heroFrame");
-const heroScrollText = document.getElementById("heroScrollText");
-const contactSection = document.querySelector(".contact-section");
-const heroTitles = [
-    "Aspiring Software Engineer",
-    "Full-Stack Developer",
-    "Mobile App Creator",
-    "Interactive UI Builder"
-];
-const totalFrames = 240;
-let currentFrameIndex = -1;
-let ticking = false;
-
-function getFramePath(index) {
-    const padded = String(index + 1).padStart(3, "0");
-    return `herosection/ezgif-frame-${padded}.png`;
-}
-
-function updateHeroAnimation() {
-    const rect = heroSection.getBoundingClientRect();
-    const windowHeight = window.innerHeight;
-    const progress = Math.min(1, Math.max(0, (windowHeight - rect.top) / (windowHeight + rect.height)));
-    const frameIndex = Math.floor(progress * (totalFrames - 1));
-
-    if (frameIndex !== currentFrameIndex) {
-        currentFrameIndex = frameIndex;
-        heroFrame.src = getFramePath(frameIndex);
-    }
-
-    const offset = progress * 40;
-    heroSection.style.setProperty("--hero-offset", `${offset}px`);
-    heroSection.style.setProperty("--hero-opacity", `${1 - progress * 0.4}`);
-
-    const textIndex = Math.min(heroTitles.length - 1, Math.floor(progress * heroTitles.length));
-    heroScrollText.textContent = heroTitles[textIndex];
-    heroFrame.style.transform = `translate(-50%, calc(-50% + ${offset * 0.5}px)) scale(1.12)`;
-    ticking = false;
-}
-
-function updateContactScroll() {
-    if (!contactSection) return;
-    const rect = contactSection.getBoundingClientRect();
-    const windowHeight = window.innerHeight;
-    const progress = Math.min(1, Math.max(0, 1 - rect.top / windowHeight));
-    const y = 20 + progress * 45;
-    const alpha = 0.16 + progress * 0.24;
-    document.documentElement.style.setProperty("--contact-spot-y", `${y}%`);
-    document.documentElement.style.setProperty("--contact-spot-alpha", alpha.toFixed(3));
-}
-
-window.addEventListener("scroll", () => {
-    if (!ticking) {
-        window.requestAnimationFrame(() => {
-            updateHeroAnimation();
-            updateContactScroll();
-        });
-        ticking = true;
-    }
-});
-
-window.addEventListener("resize", () => {
-    updateHeroAnimation();
-    updateContactScroll();
-});
-updateHeroAnimation();
-updateContactScroll();
-</script>
 </html>
+
